@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:quizz/data/model/quizz.dart';
 import 'package:quizz/res/styles.dart';
 import '../result_page.dart';
 import '../res/colors.dart';
 import '../res/strings.dart';
 
 class QuizPageMobile extends StatefulWidget {
-  final List<Map<String, Object>> questions;
+  final List<Quizz> questions;
   const QuizPageMobile({super.key, required this.questions});
 
   @override
@@ -16,7 +17,7 @@ class QuizPageMobileState extends State<QuizPageMobile> {
   int _currentQuestionIndex = 0;
   int _score = 0;
   final List<String> _answers = [];
-  late List<Map<String, Object>> _questions; // Initialize later
+  late List<Quizz> _questions; // Initialize later
   bool _isDialogShowing = false;
   String? _selectedAnswer;
 
@@ -64,7 +65,7 @@ class QuizPageMobileState extends State<QuizPageMobile> {
                     const SizedBox(height: 20),
 
                     // Addon text
-                    if (currentQuestion['addon'] as String != '')
+                    if (currentQuestion.addon != '')
                       Container(
                         width: 500,
                         padding: const EdgeInsets.all(16),
@@ -73,7 +74,7 @@ class QuizPageMobileState extends State<QuizPageMobile> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
-                          currentQuestion['addon'] as String,
+                          currentQuestion.addon,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium
@@ -83,7 +84,7 @@ class QuizPageMobileState extends State<QuizPageMobile> {
 
                     // Question text
                     Text(
-                      currentQuestion['question'] as String,
+                      currentQuestion.question,
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge
@@ -93,8 +94,7 @@ class QuizPageMobileState extends State<QuizPageMobile> {
 
                     // Option
                     Column(
-                      children: (currentQuestion['options'] as List<String>)
-                          .map((option) {
+                      children: (currentQuestion.option).map((option) {
                         return Container(
                           decoration: MyStyle.optionBoxDecoration(
                               _selectedAnswer, option),
@@ -103,8 +103,7 @@ class QuizPageMobileState extends State<QuizPageMobile> {
                             borderRadius: MyStyle.radius50,
                             child: Material(
                               // Material widget to handle the ink effect
-                              color: Colors
-                                  .transparent, // Set color to transparent
+                              color: Colors.transparent,
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(
                                     50), // Match the border radius
@@ -119,10 +118,23 @@ class QuizPageMobileState extends State<QuizPageMobile> {
                                             .textTheme
                                             .bodyMedium!
                                             .copyWith(
-                                                fontWeight: FontWeight.bold)
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: option
+                                                          .contains(';') ||
+                                                      option.contains('Text(') || option.contains('t:')
+                                                  ? Strings.jetBrains
+                                                  : Strings.nunito,
+                                            )
                                         : Theme.of(context)
                                             .textTheme
-                                            .bodyMedium,
+                                            .bodyMedium!
+                                            .copyWith(
+                                              fontFamily: option
+                                                          .contains(';') ||
+                                                      option.contains('Text(')|| option.contains('t:')
+                                                  ? Strings.jetBrains
+                                                  : Strings.nunito,
+                                            ),
                                   ),
                                   value: option,
                                   groupValue: _selectedAnswer,
@@ -160,7 +172,7 @@ class QuizPageMobileState extends State<QuizPageMobile> {
   void _answerQuestion() {
     setState(() {
       _answers.add(_selectedAnswer!);
-      if (_selectedAnswer == _questions[_currentQuestionIndex]['answer']) {
+      if (_selectedAnswer == _questions[_currentQuestionIndex].answer) {
         _score++;
       }
       _selectedAnswer = null; // Reset selected answer for the next question

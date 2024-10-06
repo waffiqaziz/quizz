@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:quizz/data/model/quizz.dart';
+
 /// A list of quiz questions, each represented as a map with the following keys:
 /// - 'question': The text of the question.
 /// - 'options': A list of possible answer options.
@@ -120,18 +122,18 @@ final List<Map<String, Object>> _questions = [
   //   ],
   //   'answer': 'double',
   // },
-  // {
-  //   'question': 'What is ob1 data type?',
-  //   'addon':
-  //       'main(){\n  var ob1=Car().color;\n}\n\nclass Car{String color=\'red\';}',
-  //   'options': [
-  //     'car',
-  //     'var',
-  //     'String',
-  //     'non of these',
-  //   ],
-  //   'answer': 'String',
-  // },
+  {
+    'question': 'What is ob1 data type?',
+    'addon':
+        'main(){\n  var ob1=Car().color;\n}\n\nclass Car{String color=\'red\';}',
+    'options': [
+      'car',
+      'var',
+      'String',
+      'non of these',
+    ],
+    'answer': 'String',
+  },
   // {
   //   'question':
   //       'A container can be decorated with a _____________, such as a background, a border, or a shadow',
@@ -144,26 +146,15 @@ final List<Map<String, Object>> _questions = [
   //   ],
   //   'answer': 'BoxDecoration',
   // },
-  // {
-  //   'question': 'MyAppBar uses a __________layout to organize its children',
-  //   'addon': '',
-  //   'options': [
-  //     'Column',
-  //     'Container',
-  //     'Row',
-  //     'Layout',
-  //   ],
-  //   'answer': 'Row',
-  // },
-  // {
-  //   'question': 'Flutter is not a language; it is an SDK',
-  //   'addon': '',
-  //   'options': [
-  //     'True',
-  //     'False',
-  //   ],
-  //   'answer': 'True',
-  // },
+  {
+    'question': 'Flutter is not a language; it is an SDK',
+    'addon': '',
+    'options': [
+      'True',
+      'False',
+    ],
+    'answer': 'True',
+  },
   // {
   //   'question': 'Which one of the following is a disadvantage of flutter?',
   //   'addon': '',
@@ -177,7 +168,7 @@ final List<Map<String, Object>> _questions = [
   // },
   // {
   //   'question':
-  //       'What is the name of the command you use to verify you have setup your flutter environment correctly?',
+  //       'What is the command to verify that the Flutter environment is set up correctly??',
   //   'addon': '',
   //   'options': [
   //     'flutter run',
@@ -189,7 +180,7 @@ final List<Map<String, Object>> _questions = [
   // },
   // {
   //   'question':
-  //       'Which of these functions contain the code which houses the widgets of your app?',
+  //       'Which of these functions contain code which houses the widgets of your app?',
   //   'addon': '',
   //   'options': [
   //     'debug()',
@@ -212,7 +203,7 @@ final List<Map<String, Object>> _questions = [
   // },
   // {
   //   'question':
-  //       'The function is responsible for returning the widgets that are attached to the screen',
+  //       'What function that responsible for returning the widgets that are attached to the screen?',
   //   'addon': '',
   //   'options': [
   //     'Container',
@@ -222,19 +213,19 @@ final List<Map<String, Object>> _questions = [
   //   ],
   //   'answer': 'runApp()',
   // },
-  // {
-  //   'question':
-  //       'When using a Text, we have a way to use a pre-configured theme in the application from the beginning. Which section makes use of this functionality correctly?',
-  //   'addon': '',
-  //   'options': [
-  //     'Text("Michael",style: TextStyle(fontWeight: FontWeight.bold),),',
-  //     'Text("Michael", style: TextStyle(color: Colors.red,  fontWeight: fontWeight.bold),),',
-  //     'Text("Michael", Theme.of(context).textTheme.titleLarge),',
-  //     'Text("Michael",  style: Theme.of(context).textTheme.titleLarge),',
-  //   ],
-  //   'answer':
-  //       'Text("Michael",  style: Theme.of(context).textTheme.titleLarge),',
-  // },
+  {
+    'question':
+        'When using a Text, theres a way to use a pre-configured theme. Which section makes use of this functionality correctly?',
+    'addon': '',
+    'options': [
+      'Text("Michael",style: TextStyle(fontWeight: FontWeight.bold),),',
+      'Text("Michael", style: TextStyle(color: Colors.red,  fontWeight: fontWeight.bold),),',
+      'Text("Michael", Theme.of(context).textTheme.titleLarge),',
+      'Text("Michael",  style: Theme.of(context).textTheme.titleLarge),',
+    ],
+    'answer':
+        'Text("Michael",  style: Theme.of(context).textTheme.titleLarge),',
+  },
   // {
   //   'question':
   //       'In a set of Widgets aligned in column form, what property makes all children of these columns aligned to the left?',
@@ -285,9 +276,9 @@ List<Map<String, Object>> getQuestions() {
   return _questions;
 }
 
-// /// A function to convert JSON list to a List of Quizz objects.
-// List<Quizz> convertQuestionsToQuizz(List<Map<String, dynamic>> questionsJson) {
-//   return questionsJson
-//       .map((questionMap) => Quizz.fromMap(questionMap))
-//       .toList();
-// }
+/// A function to convert JSON list to a List of Quizz objects.
+List<Quizz> convertQuestionsToQuizz(List<Map<String, Object>>  questionsJson) {
+  return questionsJson
+      .map((questionMap) => Quizz.fromMap(questionMap))
+      .toList();
+}

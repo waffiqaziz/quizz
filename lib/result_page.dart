@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:quizz/data/model/quizz.dart';
 import 'package:quizz/res/colors.dart';
 import 'package:quizz/res/strings.dart';
 
 class ResultPage extends StatelessWidget {
   final int score;
   final List<String> answers;
-  final List<Map<String, Object>> questions;
+  final List<Quizz> questions;
 
   const ResultPage(
       {super.key,
@@ -56,11 +57,11 @@ class ResultPage extends StatelessWidget {
                   child: Card.filled(
                     color: Colors.white,
                     child: ListTile(
-                      title: Text(questions[index]['question'] as String),
+                      title: Text(questions[index].question),
                       subtitle: Text(
                         Strings.yourAnswer(answers, index, questions),
                         style: TextStyle(
-                          color: answers[index] == questions[index]['answer']
+                          color: answers[index] == questions[index].answer
                               ? Colors.green
                               : Colors.red,
                         ),

@@ -2,13 +2,14 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quizz/data/model/quizz.dart';
 import 'package:quizz/res/colors.dart';
 import 'package:quizz/res/styles.dart';
 import '../result_page.dart';
 import '../res/strings.dart';
 
 class QuizPageWide extends StatefulWidget {
-  final List<Map<String, Object>> questions;
+  final List<Quizz> questions;
   const QuizPageWide({super.key, required this.questions});
 
   @override
@@ -19,7 +20,7 @@ class QuizPageWideState extends State<QuizPageWide> {
   int _currentQuestionIndex = 0;
   int _score = 0;
   final List<String> _answers = [];
-  late List<Map<String, Object>> _questions; // Initialize later
+  late List<Quizz> _questions; // Initialize later
   bool _isDialogShowing = false;
   String? _selectedAnswer;
 
@@ -74,7 +75,7 @@ class QuizPageWideState extends State<QuizPageWide> {
                     const SizedBox(height: 20),
 
                     // Show addon text
-                    if (currentQuestion['addon'] as String != '')
+                    if (currentQuestion.addon != '')
                       Container(
                         width: 500,
                         padding: const EdgeInsets.all(16),
@@ -83,7 +84,7 @@ class QuizPageWideState extends State<QuizPageWide> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
-                          currentQuestion['addon'] as String,
+                          currentQuestion.addon,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium
@@ -94,7 +95,7 @@ class QuizPageWideState extends State<QuizPageWide> {
                     // Question text
                     const SizedBox(height: 10),
                     Text(
-                      currentQuestion['question'] as String,
+                      currentQuestion.question,
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge
@@ -105,10 +106,8 @@ class QuizPageWideState extends State<QuizPageWide> {
                     // Option
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: (currentQuestion['options'] as List<String>)
-                          .asMap()
-                          .entries
-                          .map((entry) {
+                      children:
+                          (currentQuestion.option).asMap().entries.map((entry) {
                         int index = entry.key;
                         String option = entry.value;
 
@@ -133,13 +132,34 @@ class QuizPageWideState extends State<QuizPageWide> {
                                         padding: const EdgeInsets.all(16.0),
                                         child: Text(
                                           option,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontWeight:
-                                                _selectedAnswer == option
-                                                    ? FontWeight.bold
-                                                    : FontWeight.normal,
-                                          ),
+                                          style: _selectedAnswer == option
+                                              ? Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium!
+                                                  .copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily:
+                                                        option.contains(';') ||
+                                                                option.contains(
+                                                                    'Text(') ||
+                                                                option.contains(
+                                                                    't:')
+                                                            ? Strings.jetBrains
+                                                            : Strings.nunito,
+                                                  )
+                                              : Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium!
+                                                  .copyWith(
+                                                    fontFamily:
+                                                        option.contains(';') ||
+                                                                option.contains(
+                                                                    'Text(') ||
+                                                                option.contains(
+                                                                    't:')
+                                                            ? Strings.jetBrains
+                                                            : Strings.nunito,
+                                                  ),
                                         ),
                                       ),
                                     ),
@@ -201,7 +221,7 @@ class QuizPageWideState extends State<QuizPageWide> {
   void _answerQuestion() {
     setState(() {
       _answers.add(_selectedAnswer!);
-      if (_selectedAnswer == _questions[_currentQuestionIndex]['answer']) {
+      if (_selectedAnswer == _questions[_currentQuestionIndex].answer) {
         _score++;
       }
       _selectedAnswer = null; // Reset selected answer for the next question
@@ -269,29 +289,21 @@ class QuizPageWideState extends State<QuizPageWide> {
       }
 
       // Check for key presses '1', '2', or '3' and update the selection accordingly
-      if (event.character == '1' &&
-          _questions[_currentQuestionIndex]['options'] != null) {
+      if (event.character == '1') {
         setState(() {
-          _selectedAnswer =
-              (_questions[_currentQuestionIndex]['options'] as List<String>)[0];
+          _selectedAnswer = (_questions[_currentQuestionIndex].option)[0];
         });
-      } else if (event.character == '2' &&
-          _questions[_currentQuestionIndex]['options'] != null) {
+      } else if (event.character == '2') {
         setState(() {
-          _selectedAnswer =
-              (_questions[_currentQuestionIndex]['options'] as List<String>)[1];
+          _selectedAnswer = (_questions[_currentQuestionIndex].option)[1];
         });
-      } else if (event.character == '3' &&
-          _questions[_currentQuestionIndex]['options'] != null) {
+      } else if (event.character == '3') {
         setState(() {
-          _selectedAnswer =
-              (_questions[_currentQuestionIndex]['options'] as List<String>)[2];
+          _selectedAnswer = (_questions[_currentQuestionIndex].option)[2];
         });
-      } else if (event.character == '4' &&
-          _questions[_currentQuestionIndex]['options'] != null) {
+      } else if (event.character == '4') {
         setState(() {
-          _selectedAnswer =
-              (_questions[_currentQuestionIndex]['options'] as List<String>)[3];
+          _selectedAnswer = (_questions[_currentQuestionIndex].option)[3];
         });
       } else if (event.logicalKey.keyLabel == 'Escape') {
         _showExitWarning();

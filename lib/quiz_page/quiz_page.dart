@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizz/data/model/quizz.dart';
 import 'package:quizz/data/source.dart';
 import 'package:quizz/quiz_page/quiz_page_mobile.dart';
 import 'package:quizz/quiz_page/quiz_page_web.dart';
@@ -11,7 +12,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class QuizPageState extends State<QuizPage> {
-  var quizData = getRandomQuestions();
+  List<Quizz> quizData = convertQuestionsToQuizz(getRandomQuestions());
 
   @override
   Widget build(BuildContext context) {
