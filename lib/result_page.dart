@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quizz/res/colors.dart';
+import 'package:quizz/res/strings.dart';
 
 class ResultPage extends StatelessWidget {
   final int score;
@@ -14,34 +16,49 @@ class ResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.black,
-        ),
-        title: Text('Quiz Result',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                )),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text('Your Score: $score/${questions.length}',
+      backgroundColor: MyColors.colorBackground,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            backgroundColor: MyColors.colorBackground,
+            floating: true,
+            pinned: false, // set true to keep  AppBar visible
+            iconTheme: const IconThemeData(
+              color: Colors.black,
+            ),
+            title: Text(
+              Strings.quizResult,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+          ),
+
+          // Score text
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+              child: Text(
+                Strings.yourScore(score, questions),
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.bold,
-                    )),
-            const SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: questions.length,
-                itemBuilder: (context, index) {
-                  return Card.filled(
+                    ),
+              ),
+            ),
+          ),
+
+          // Answer list
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Card.filled(
+                    color: Colors.white,
                     child: ListTile(
                       title: Text(questions[index]['question'] as String),
                       subtitle: Text(
-                        'Your Answer: ${answers[index]}\nCorrect Answer: ${questions[index]['answer']}',
+                        Strings.yourAnswer(answers, index, questions),
                         style: TextStyle(
                           color: answers[index] == questions[index]['answer']
                               ? Colors.green
@@ -49,18 +66,26 @@ class ResultPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                  );
+                  ),
+                );
+              },
+              childCount: questions.length,
+            ),
+          ),
+
+          // Button
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+              child: FilledButton(
+                onPressed: () {
+                  Navigator.pop(context);
                 },
+                child: Text(Strings.backToHome),
               ),
             ),
-            FilledButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Back to Home'),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

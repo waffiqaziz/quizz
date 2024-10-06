@@ -80,6 +80,9 @@ flutter:
     - family: Varela
       fonts:
         - asset: fonts/varela/VarelaRound-Regular.ttf
+    - family: JetBrains
+      fonts:
+        - asset: fonts/jetbrains/JetBrainsMono-Regular.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

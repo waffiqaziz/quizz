@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quizz/res/colors.dart';
 import 'package:quizz/res/styles.dart';
 import '../result_page.dart';
-import '../res/colors.dart';
 import '../res/strings.dart';
 
 class QuizPageWide extends StatefulWidget {
@@ -48,31 +48,51 @@ class QuizPageWideState extends State<QuizPageWide> {
             return;
           }
           final shouldPop = await _showExitWarning();
+          _isDialogShowing = shouldPop;
           if (context.mounted && shouldPop == true) {
             Navigator.pop(context);
           }
         }
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: MyColors.colorBackground,
-        ),
+        appBar: MyStyle.quizBar,
         backgroundColor: MyColors.colorBackground,
         body: SingleChildScrollView(
           child: Center(
             child: SizedBox(
-              width: 500,
+              width: 900,
               child: Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Question
+                    // Question number
                     Text(
-                      'Question ${_currentQuestionIndex + 1}/${_questions.length}',
+                      Strings.questionNumber(_currentQuestionIndex, _questions),
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     const SizedBox(height: 20),
+
+                    // Show addon text
+                    if (currentQuestion['addon'] as String != '')
+                      Container(
+                        width: 500,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text(
+                          currentQuestion['addon'] as String,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(fontFamily: Strings.jetBrains),
+                        ),
+                      ),
+
+                    // Question text
+                    const SizedBox(height: 10),
                     Text(
                       currentQuestion['question'] as String,
                       style: Theme.of(context)
@@ -83,48 +103,74 @@ class QuizPageWideState extends State<QuizPageWide> {
                     const SizedBox(height: 20),
 
                     // Option
-                    Column(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: (currentQuestion['options'] as List<String>)
-                          .map((option) {
-                        return Container(
-                          decoration: MyStyle.optionBoxDecoration(
-                              _selectedAnswer, option),
-                          margin: const EdgeInsets.only(bottom: 10),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: Material(
-                              // Material widget to handle the ink effect
-                              color: Colors
-                                  .transparent, // Set color to transparent
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(
-                                    50), // Match the border radius
-                                onTap: () {
-                                  setState(() {});
-                                },
-                                child: RadioListTile<String>(
-                                  title: Text(
-                                    option,
-                                    style: _selectedAnswer == option
-                                        ? Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(
-                                                fontWeight: FontWeight.bold)
-                                        : Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium,
+                          .asMap()
+                          .entries
+                          .map((entry) {
+                        int index = entry.key;
+                        String option = entry.value;
+
+                        return Expanded(
+                          child: AspectRatio(
+                            aspectRatio: 1.5,
+                            child: Stack(
+                              children: [
+                                Container(
+                                  decoration: MyStyle.optionBoxDecorationWeb(
+                                      _selectedAnswer, option),
+                                  margin: const EdgeInsets.only(right: 10),
+                                  child: InkWell(
+                                    borderRadius: MyStyle.radius50,
+                                    onTap: () {
+                                      setState(() {
+                                        _selectedAnswer = option;
+                                      });
+                                    },
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Text(
+                                          option,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontWeight:
+                                                _selectedAnswer == option
+                                                    ? FontWeight.bold
+                                                    : FontWeight.normal,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                  value: option,
-                                  groupValue: _selectedAnswer,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _selectedAnswer = value;
-                                    });
-                                  },
-                                  activeColor: MyColors.colorPrimary,
                                 ),
-                              ),
+
+                                // Keyboard helper
+                                Positioned(
+                                  top: 8,
+                                  right: 20,
+                                  child: CircleAvatar(
+                                    backgroundColor: _selectedAnswer == option
+                                        ? MyColors.colorOnPrimary
+                                        : Colors.grey[300],
+                                    maxRadius: 13,
+                                    child: Text(
+                                      (index + 1).toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(
+                                            color: _selectedAnswer == option
+                                                ? MyColors.colorPrimary
+                                                : Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         );
@@ -132,13 +178,11 @@ class QuizPageWideState extends State<QuizPageWide> {
                     ),
                     const SizedBox(height: 20),
 
-                    // Next button is enable only if selected
+                    // Next button is enabled only if oprion is selected
                     FilledButton(
                       onPressed:
                           _selectedAnswer == null ? null : _answerQuestion,
-                      child: const Text(
-                        'N e x t',
-                      ),
+                      child: Text(Strings.next),
                     ),
                   ],
                 ),
@@ -150,6 +194,10 @@ class QuizPageWideState extends State<QuizPageWide> {
     );
   }
 
+  void rowOption() {}
+
+  void columnOption() {}
+
   void _answerQuestion() {
     setState(() {
       _answers.add(_selectedAnswer!);
@@ -157,9 +205,11 @@ class QuizPageWideState extends State<QuizPageWide> {
         _score++;
       }
       _selectedAnswer = null; // Reset selected answer for the next question
+
       if (_currentQuestionIndex < _questions.length - 1) {
-        _currentQuestionIndex++;
+        _currentQuestionIndex++; // trigger to next question (next index)
       } else {
+        // open ResultPage if all questions has been show
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

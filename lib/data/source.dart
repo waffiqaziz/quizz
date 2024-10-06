@@ -1,42 +1,287 @@
-import 'package:quizz/data/model/quizz.dart';
+import 'dart:math';
 
 /// A list of quiz questions, each represented as a map with the following keys:
 /// - 'question': The text of the question.
 /// - 'options': A list of possible answer options.
 /// - 'answer': The correct answer for the question.
-/// - 'type': The type of question as defined in the [Quizz] class.
 final List<Map<String, Object>> _questions = [
+  // {
+  //   'question': 'What is Flutter?',
+  //   'addon': '',
+  //   'options': [
+  //     'A UI toolkit for building natively compiled applications',
+  //     'A programming language used to develop mobile apps',
+  //     'A framework for building cross-platform apps',
+  //     'A cloud-based mobile development platform'
+  //   ],
+  //   'answer': 'A UI toolkit for building natively compiled applications',
+  // },
+  // {
+  //   'question': 'Which language is used by Flutter?',
+  //   'addon': '',
+  //   'options': ['Java', 'Swift', 'Dart', 'JavaScript'],
+  //   'answer': 'Dart',
+  // },
+  // {
+  //   'question': 'What is a Stateful Widget?',
+  //   'addon': '',
+  //   'options': [
+  //     'A stateless widget',
+  //     'A widget that never re-renders',
+  //     'An immutable widget',
+  //     'A widget that manages its own state and can be rebuilt based on changes',
+  //   ],
+  //   'answer':
+  //       'A widget that manages its own state and can be rebuilt based on changes',
+  // },
   {
-    'question': 'What is Flutter?',
+    'question': 'What is the output of that code?',
+    'addon': 'const R = 3.1;\nR=5;\nprint(R)',
     'options': [
-      'A UI toolkit for building natively compiled applications',
-      'A programming language used to develop mobile apps',
-      'A framework for building cross-platform apps',
-      'A cloud-based mobile development platform'
+      'true',
+      '3.1',
+      '5',
+      'error',
     ],
-    'answer': 'A UI toolkit for building natively compiled applications',
-    'type': 1,
+    'answer': 'error',
   },
   {
-    'question': 'Which language is used by Flutter?',
-    'options': ['Java', 'Swift', 'Dart', 'JavaScript'],
-    'answer': 'Dart',
-    'type': 1,
-  },
-  {
-    'question': 'What is a Stateful Widget?',
+    'question': 'Which one print 10?',
+    'addon': '',
     'options': [
-      'A stateless widget',
-      'A widget that never re-renders',
-      'An immutable widget',
-      'A widget that manages its own state and can be rebuilt based on changes',
+      'int num =9;\nprint ("the number is \$num + 1");',
+      'int num =9;\nprint ("the number is \${num + 1}");',
+      'int num =9;\nprint ("the number is num +1");',
+      'int num =9;\nprint ("the number is " + (num +1));',
     ],
-    'answer': 'A widget that manages its own state and can be rebuilt based on changes',
-    'type': 1,
+    'answer': 'int num =9;\nprint ("the number is \${num + 1}");',
   },
+  // {
+  //   'question': 'What is the output of that code?',
+  //   'addon': '',
+  //   'options': [
+  //     '6',
+  //     '4+2',
+  //     '42',
+  //     'a+b',
+  //   ],
+  //   'answer': '42',
+  // },
+  // {
+  //   'question': 'What is the output of that code?',
+  //   'addon': 'var a = 9;\nvar b = 5;\nprint("a>b");',
+  //   'options': [
+  //     'true',
+  //     '9>5',
+  //     'a>b',
+  //     'error',
+  //   ],
+  //   'answer': '',
+  // },
+  // {
+  //   'question':
+  //       'Dart is an open source programming language developed by ......?',
+  //   'addon': '',
+  //   'options': [
+  //     'Microsoft',
+  //     'Oracle',
+  //     'Google',
+  //     'JetBrains',
+  //   ],
+  //   'answer': 'Google',
+  // },
+  // {
+  //   'question':
+  //       'If you initialize a variable as var, once assigned type cannot change?',
+  //   'addon': '',
+  //   'options': [
+  //     'True',
+  //     'False',
+  //   ],
+  //   'answer': 'True',
+  // },
+  // {
+  //   'question': 'Dart is native language?',
+  //   'addon': '',
+  //   'options': [
+  //     'true',
+  //     'false',
+  //   ],
+  //   'answer': 'false',
+  // },
+  // {
+  //   'question': 'What is the data type of the variable x?',
+  //   'addon': 'num x=18.0;',
+  //   'options': [
+  //     'num',
+  //     'double',
+  //     'float',
+  //     'int',
+  //   ],
+  //   'answer': 'double',
+  // },
+  // {
+  //   'question': 'What is ob1 data type?',
+  //   'addon':
+  //       'main(){\n  var ob1=Car().color;\n}\n\nclass Car{String color=\'red\';}',
+  //   'options': [
+  //     'car',
+  //     'var',
+  //     'String',
+  //     'non of these',
+  //   ],
+  //   'answer': 'String',
+  // },
+  // {
+  //   'question':
+  //       'A container can be decorated with a _____________, such as a background, a border, or a shadow',
+  //   'addon': '',
+  //   'options': [
+  //     'BoxDecoration',
+  //     'boxDecorator',
+  //     'None of the above',
+  //     'Both can be used',
+  //   ],
+  //   'answer': 'BoxDecoration',
+  // },
+  // {
+  //   'question': 'MyAppBar uses a __________layout to organize its children',
+  //   'addon': '',
+  //   'options': [
+  //     'Column',
+  //     'Container',
+  //     'Row',
+  //     'Layout',
+  //   ],
+  //   'answer': 'Row',
+  // },
+  // {
+  //   'question': 'Flutter is not a language; it is an SDK',
+  //   'addon': '',
+  //   'options': [
+  //     'True',
+  //     'False',
+  //   ],
+  //   'answer': 'True',
+  // },
+  // {
+  //   'question': 'Which one of the following is a disadvantage of flutter?',
+  //   'addon': '',
+  //   'options': [
+  //     'Hot Reload',
+  //     'Hot Restart',
+  //     'Increased App Size',
+  //     'Increased Productivity',
+  //   ],
+  //   'answer': 'Increased App Size',
+  // },
+  // {
+  //   'question':
+  //       'What is the name of the command you use to verify you have setup your flutter environment correctly?',
+  //   'addon': '',
+  //   'options': [
+  //     'flutter run',
+  //     'flutter doctor',
+  //     'flutter surgeon',
+  //     'dart export',
+  //   ],
+  //   'answer': 'flutter doctor',
+  // },
+  // {
+  //   'question':
+  //       'Which of these functions contain the code which houses the widgets of your app?',
+  //   'addon': '',
+  //   'options': [
+  //     'debug()',
+  //     'build()',
+  //     'random()',
+  //     'runApp()',
+  //   ],
+  //   'answer': 'build()',
+  // },
+  // {
+  //   'question': 'How many types of widgets are there in Flutter?',
+  //   'addon': '',
+  //   'options': [
+  //     '2',
+  //     '1',
+  //     '5',
+  //     '3',
+  //   ],
+  //   'answer': '2',
+  // },
+  // {
+  //   'question':
+  //       'The function is responsible for returning the widgets that are attached to the screen',
+  //   'addon': '',
+  //   'options': [
+  //     'Container',
+  //     'SizedBox',
+  //     'main()',
+  //     'runApp()',
+  //   ],
+  //   'answer': 'runApp()',
+  // },
+  // {
+  //   'question':
+  //       'When using a Text, we have a way to use a pre-configured theme in the application from the beginning. Which section makes use of this functionality correctly?',
+  //   'addon': '',
+  //   'options': [
+  //     'Text("Michael",style: TextStyle(fontWeight: FontWeight.bold),),',
+  //     'Text("Michael", style: TextStyle(color: Colors.red,  fontWeight: fontWeight.bold),),',
+  //     'Text("Michael", Theme.of(context).textTheme.titleLarge),',
+  //     'Text("Michael",  style: Theme.of(context).textTheme.titleLarge),',
+  //   ],
+  //   'answer':
+  //       'Text("Michael",  style: Theme.of(context).textTheme.titleLarge),',
+  // },
+  // {
+  //   'question':
+  //       'In a set of Widgets aligned in column form, what property makes all children of these columns aligned to the left?',
+  //   'addon': '',
+  //   'options': [
+  //     'crossAxisAlignment: CrossAxisAlignment.start',
+  //     'mainAxisAlignment: MainAxisAlignment.start',
+  //     'crossAxisAlignment: CrossAxisAlignment.left',
+  //     'crossAxisAlignment: start',
+  //   ],
+  //   'answer': 'crossAxisAlignment: CrossAxisAlignment.start',
+  // },
 ];
 
-List<Map<String, Object>> getQuestion() {
+// Format questions
+// {
+//   'question': '',
+//   'addon': '',
+//   'options': [
+//     '',
+//     '',
+//     '',
+//     '',
+//   ],
+//   'answer': '',
+// },
+
+List<Map<String, Object>> getRandomQuestions() {
+  final questions = getQuestions();
+  final selectedQuestions = <Map<String, Object>>[];
+
+  final numberOfQuestionsToSelect =
+      questions.length < 10 ? questions.length : 10;
+
+  while (selectedQuestions.length < numberOfQuestionsToSelect) {
+    var randomIndex = Random().nextInt(questions.length);
+    var randomQuestion = questions[randomIndex];
+
+    if (!selectedQuestions.contains(randomQuestion)) {
+      selectedQuestions.add(randomQuestion);
+    }
+  }
+
+  return selectedQuestions;
+}
+
+List<Map<String, Object>> getQuestions() {
   return _questions;
 }
 

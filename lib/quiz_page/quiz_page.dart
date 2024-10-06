@@ -11,14 +11,16 @@ class QuizPage extends StatefulWidget {
 }
 
 class QuizPageState extends State<QuizPage> {
+  var quizData = getRandomQuestions();
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraint) {
         if (constraint.maxWidth > 900) {
-          return QuizPageWide(questions: getQuestion()); // Show wide layout
+          return QuizPageWide(questions: quizData); // Show wide layout
         } else {
-          return QuizPageMobile(questions: getQuestion()); // Show mobile layout
+          return QuizPageMobile(questions: quizData); // Show mobile layout
         }
       },
     );

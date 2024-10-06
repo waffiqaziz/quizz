@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizz/res/styles.dart';
 import '../result_page.dart';
 import '../res/colors.dart';
 import '../res/strings.dart';
@@ -37,15 +38,14 @@ class QuizPageMobileState extends State<QuizPageMobile> {
             return;
           }
           final shouldPop = await _showExitWarning();
+          _isDialogShowing = shouldPop;
           if (context.mounted && shouldPop == true) {
             Navigator.pop(context);
           }
         }
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: MyColors.colorBackground,
-        ),
+        appBar: MyStyle.quizBar,
         backgroundColor: MyColors.colorBackground,
         body: SingleChildScrollView(
           child: Padding(
@@ -56,12 +56,32 @@ class QuizPageMobileState extends State<QuizPageMobile> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Question
+                    // Question number
                     Text(
-                      'Question ${_currentQuestionIndex + 1}/${_questions.length}',
+                      Strings.questionNumber(_currentQuestionIndex, _questions),
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     const SizedBox(height: 20),
+
+                    // Addon text
+                    if (currentQuestion['addon'] as String != '')
+                      Container(
+                        width: 500,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text(
+                          currentQuestion['addon'] as String,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(fontFamily: Strings.jetBrains),
+                        ),
+                      ),
+
+                    // Question text
                     Text(
                       currentQuestion['question'] as String,
                       style: Theme.of(context)
@@ -76,9 +96,11 @@ class QuizPageMobileState extends State<QuizPageMobile> {
                       children: (currentQuestion['options'] as List<String>)
                           .map((option) {
                         return Container(
+                          decoration: MyStyle.optionBoxDecoration(
+                              _selectedAnswer, option),
                           margin: const EdgeInsets.only(bottom: 10),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
+                            borderRadius: MyStyle.radius50,
                             child: Material(
                               // Material widget to handle the ink effect
                               color: Colors
@@ -123,9 +145,7 @@ class QuizPageMobileState extends State<QuizPageMobile> {
                     FilledButton(
                       onPressed:
                           _selectedAnswer == null ? null : _answerQuestion,
-                      child: const Text(
-                        'N e x t',
-                      ),
+                      child: Text(Strings.next),
                     ),
                   ],
                 ),
