@@ -10,7 +10,7 @@ class Strings {
   static String information = 'Information';
   static String scontinue = 'Continue';
   static String back = 'Back';
-  static String messageInformation = 'Please note: Once you select an option and click \'Next\' there is no going back. Make sure your choice is final.';
+  static String messageInformation = 'Please note: Once you select an option and click \'Next\' button there is no going back. Make sure your choice is final.';
   static String welcomeMessage =
       'Sharpen your Flutter & Dart skills! \nTake on fun quizzes, challenge your knowledge, and become a Flutter pro!';
 
@@ -43,4 +43,5 @@ class Strings {
     return 'Your Answer: ${answers[index]}\nCorrect Answer: ${questions[index].answer}';
   }
 
+   static String githubUrl = 'https://github.com/waffiqaziz/quizz';
 }
