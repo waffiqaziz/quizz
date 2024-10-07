@@ -56,6 +56,9 @@ class ResultPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Card.filled(
                     color: Colors.white,
+                    borderOnForeground: true,
+                    elevation: 2.0,
+                    shadowColor: Colors.grey[500],
                     child: ListTile(
                       title: Text(questions[index].question),
                       subtitle: Text(

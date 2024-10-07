@@ -6,7 +6,11 @@ class Strings {
   // HomePage
   static String startQuizz = 'Start Quizz';
   static String readyQuizz = 'Ready for Quizz';
-  static String quizInfo = '10 questions ( 3 - 5 minutes )';
+  static String quizInfo = '10 questions ( 2 - 4 minutes )';
+  static String information = 'Information';
+  static String scontinue = 'Continue';
+  static String back = 'Back';
+  static String messageInformation = 'Please note: Once you select an option and click \'Next\' there is no going back. Make sure your choice is final.';
   static String welcomeMessage =
       'Sharpen your Flutter & Dart skills! \nTake on fun quizzes, challenge your knowledge, and become a Flutter pro!';
 

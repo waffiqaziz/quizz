@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                 const SizedBox(height: 20),
                 FilledButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/quiz');
+                    _showDialog(context);
                   },
                   child: Text(
                     Strings.startQuizz,
@@ -57,5 +57,38 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<bool> _showDialog(BuildContext context) async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(Strings.information,
+            style: const TextStyle(fontWeight: FontWeight.bold)),
+        content: Text(
+          Strings.messageInformation,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text(Strings.back),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/quiz');
+            },
+            child: Text(
+              Strings.scontinue,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    return result ?? false;
   }
 }
