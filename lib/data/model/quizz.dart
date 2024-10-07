@@ -1,10 +1,8 @@
-/// Represents a quiz question in the application.
-///
 /// Each instance of the `Quizz` class contains the following properties:
 ///
 /// - [question] : A string representing the quiz question.
 /// - [addon] : An addon like code or image url.
-/// - [options] : A list of strings representing the possible answer options.
+/// - [option] : A list of strings representing the possible answer options.
 /// - [answer] : A string representing the correct answer to the question.
 class Quizz {
   String question;

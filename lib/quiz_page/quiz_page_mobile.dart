@@ -1,48 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:quizz/data/model/quizz.dart';
 import 'package:quizz/res/styles.dart';
-import '../result_page.dart';
+
 import '../res/colors.dart';
 import '../res/strings.dart';
 
-class QuizPageMobile extends StatefulWidget {
+class QuizPageMobile extends StatelessWidget {
   final List<Quizz> questions;
-  const QuizPageMobile({super.key, required this.questions});
+  final int currentQuestionIndex;
+  final int score;
+  final String? selectedAnswer;
+  final Function(String) onOptionSelected;
+  final VoidCallback onNextQuestion;
 
-  @override
-  QuizPageMobileState createState() => QuizPageMobileState();
-}
-
-class QuizPageMobileState extends State<QuizPageMobile> {
-  int _currentQuestionIndex = 0;
-  int _score = 0;
-  final List<String> _answers = [];
-  late List<Quizz> _questions; // Initialize later
-  bool _isDialogShowing = false;
-  String? _selectedAnswer;
-
-  @override
-  void initState() {
-    super.initState();
-    _questions = widget.questions;
-  }
+  const QuizPageMobile({
+    super.key,
+    required this.questions,
+    required this.currentQuestionIndex,
+    required this.score,
+    required this.selectedAnswer,
+    required this.onOptionSelected,
+    required this.onNextQuestion,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = _questions[_currentQuestionIndex];
+    final currentQuestion = questions[currentQuestionIndex];
 
     return PopScope(
-      canPop: false,
+      canPop: false, // Prevent the pop action initially
       onPopInvokedWithResult: (didPop, result) async {
-        {
-          if (didPop) {
-            return;
-          }
-          final shouldPop = await _showExitWarning();
-          _isDialogShowing = shouldPop;
-          if (context.mounted && shouldPop == true) {
-            Navigator.pop(context);
-          }
+        if (didPop) {
+          return; // If the user has already popped, do nothing
+        }
+        final shouldPop = await _showExitWarning(context);
+        if (context.mounted && shouldPop) {
+          Navigator.pop(context); // Only pop if the user confirmed
         }
       },
       child: Scaffold(
@@ -58,92 +51,41 @@ class QuizPageMobileState extends State<QuizPageMobile> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     // Question number
-                    Text(
-                      Strings.questionNumber(_currentQuestionIndex, _questions),
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    const SizedBox(height: 20),
+                    MyStyle.questionNumber(
+                        currentQuestionIndex, questions, context),
 
-                    // Addon text
-                    if (currentQuestion.addon != '')
-                      Container(
-                        width: 500,
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          currentQuestion.addon,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(fontFamily: Strings.jetBrains),
-                        ),
-                      ),
+                    // Question addon
+                    MyStyle.questionAddon(currentQuestion.addon, context),
+                    const SizedBox(height: 10),
 
                     // Question text
-                    Text(
-                      currentQuestion.question,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
+                    MyStyle.questionText(currentQuestion.question, context),
                     const SizedBox(height: 20),
 
                     // Option
                     Column(
-                      children: (currentQuestion.option).map((option) {
+                      children: currentQuestion.option.map((option) {
                         return Container(
                           decoration: MyStyle.optionBoxDecoration(
-                              _selectedAnswer, option),
+                              selectedAnswer, option),
                           margin: const EdgeInsets.only(bottom: 10),
                           child: ClipRRect(
                             borderRadius: MyStyle.radius50,
                             child: Material(
-                              // Material widget to handle the ink effect
                               color: Colors.transparent,
                               child: InkWell(
-                                borderRadius: BorderRadius.circular(
-                                    50), // Match the border radius
-                                onTap: () {
-                                  setState(() {});
-                                },
+                                borderRadius: BorderRadius.circular(50),
+                                onTap: () => onOptionSelected(option),
                                 child: RadioListTile<String>(
                                   title: Text(
                                     option,
-                                    style: _selectedAnswer == option
-                                        ? Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: option
-                                                          .contains(';') ||
-                                                      option.contains('Text(') || option.contains('t:')
-                                                  ? Strings.jetBrains
-                                                  : Strings.nunito,
-                                            )
-                                        : Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(
-                                              fontFamily: option
-                                                          .contains(';') ||
-                                                      option.contains('Text(')|| option.contains('t:')
-                                                  ? Strings.jetBrains
-                                                  : Strings.nunito,
-                                            ),
+                                    style: MyStyle.optionTextStyle(
+                                        selectedAnswer, option, context),
                                   ),
+                                  groupValue: selectedAnswer,
                                   value: option,
-                                  groupValue: _selectedAnswer,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _selectedAnswer = value;
-                                    });
-                                  },
-                                  activeColor: MyColors.colorPrimary,
+                                  onChanged: (value) =>
+                                      onOptionSelected(value!),
                                 ),
                               ),
                             ),
@@ -153,10 +95,9 @@ class QuizPageMobileState extends State<QuizPageMobile> {
                     ),
                     const SizedBox(height: 20),
 
-                    // Next button is enable only if selected
+                    // Next button
                     FilledButton(
-                      onPressed:
-                          _selectedAnswer == null ? null : _answerQuestion,
+                      onPressed: selectedAnswer == null ? null : onNextQuestion,
                       child: Text(Strings.next),
                     ),
                   ],
@@ -169,59 +110,31 @@ class QuizPageMobileState extends State<QuizPageMobile> {
     );
   }
 
-  void _answerQuestion() {
-    setState(() {
-      _answers.add(_selectedAnswer!);
-      if (_selectedAnswer == _questions[_currentQuestionIndex].answer) {
-        _score++;
-      }
-      _selectedAnswer = null; // Reset selected answer for the next question
-      if (_currentQuestionIndex < _questions.length - 1) {
-        _currentQuestionIndex++;
-      } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ResultPage(
-                score: _score, answers: _answers, questions: _questions),
+  Future<bool> _showExitWarning(BuildContext context) async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(Strings.areYouSure,
+            style: const TextStyle(fontWeight: FontWeight.bold)),
+        content: Text(Strings.warningMessage),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: Text(Strings.no,
+                style: const TextStyle(fontWeight: FontWeight.bold)),
           ),
-        );
-      }
-    });
-  }
-
-  Future<bool> _showExitWarning() async {
-    if (_isDialogShowing) {
-      return false; // Prevent showing another dialog
-    } else {
-      _isDialogShowing = !_isDialogShowing;
-    }
-
-    final result = await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text(Strings.areYouSure),
-            content: Text(Strings.warningMessage),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                  _isDialogShowing = false; // Reset the flag when dismissed
-                },
-                child: Text(Strings.no),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                  _isDialogShowing = false; // Reset the flag when dismissed
-                },
-                child: Text(Strings.yes),
-              ),
-            ],
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            child: Text(Strings.yes),
           ),
-        ) ??
-        false;
+        ],
+      ),
+    );
 
-    return result;
+    return result ?? false;
   }
 }
