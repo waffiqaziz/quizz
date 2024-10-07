@@ -8,7 +8,7 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-## What You can get in her?
+## What You can get in here?
 
 This project demonstrates fundamental Flutter skills by implementing a variety of core widgets and features. The app showcases the following Flutter components and concepts:
 
