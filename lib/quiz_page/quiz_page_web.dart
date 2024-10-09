@@ -68,7 +68,7 @@ class QuizPageWideState extends State<QuizPageWide> {
             child: SizedBox(
               width: 900,
               child: Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: MyStyle.horizontal30(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -171,7 +171,7 @@ class QuizPageWideState extends State<QuizPageWide> {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: MyStyle.radius50,
                 onTap: () => widget.onOptionSelected(option),
                 child: RadioListTile<String>(
                   title: Text(
@@ -192,6 +192,8 @@ class QuizPageWideState extends State<QuizPageWide> {
   }
 
   Row _optionStringWidget() {
+    final lengthOption =
+        widget.questions[widget.currentQuestionIndex].option.length;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: (widget.questions[widget.currentQuestionIndex].option)
@@ -199,7 +201,6 @@ class QuizPageWideState extends State<QuizPageWide> {
           .entries
           .map((entry) {
         String option = entry.value;
-
         return Flexible(
           child: AspectRatio(
             aspectRatio: 1.9,
@@ -208,12 +209,14 @@ class QuizPageWideState extends State<QuizPageWide> {
                 Container(
                   decoration: MyStyle.optionBoxDecorationWeb(
                       widget.selectedAnswer, option),
-                  margin: const EdgeInsets.only(right: 10),
+                  margin: EdgeInsets.only(
+                      right: entry.key < lengthOption - 1 ? 10 : 0),
                   child: InkWell(
                     borderRadius: MyStyle.radius50,
                     onTap: () => widget.onOptionSelected(option),
                     child: Center(
                       child: Padding(
+                        // add padding inside flexible
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
                           option,
