@@ -80,7 +80,8 @@ class ResultPage extends StatelessWidget {
           // Button
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+              padding: const EdgeInsets.only(
+                  left: 30, right: 30, bottom: 30, top: 20),
               child: FilledButton(
                 onPressed: () {
                   Navigator.pop(context);

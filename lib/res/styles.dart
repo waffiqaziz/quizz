@@ -4,6 +4,7 @@ import 'package:quizz/res/strings.dart';
 import 'colors.dart';
 
 class MyStyle {
+  
   static AppBar quizBar = AppBar(
     backgroundColor: MyColors.colorBackground,
   );
@@ -90,5 +91,9 @@ class MyStyle {
     } else {
       return Container();
     }
+  }
+
+  static EdgeInsets horizontal30(){
+    return const EdgeInsets.symmetric(horizontal: 30);
   }
 }
