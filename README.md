@@ -2,11 +2,58 @@
 
 A simple Flutter project designed for educational purposes, functioning as a quiz app.
 
+[![Flutter Version](https://img.shields.io/badge/flutter-v3.35.2-blue?logo=flutter&logoColor=white)](https://github.com/flutter/flutter/blob/main/CHANGELOG.md#3352)
+
 ## Getting Started
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Development Setup
+
+This guide will help you set up the Storyzz project for local development.
+
+### Prerequisites
+
+- [Git](https://git-scm.com/) (latest stable version)
+- [Flutter SDK](https://docs.flutter.dev/get-started/install)
+- [Flutter Version Management (FVM)](https://fvm.app/)
+- An IDE ([VS Code](https://code.visualstudio.com/download),
+[Android Studio](https://developer.android.com/studio), etc.)
+
+### Setup Steps
+
+#### 1. Clone the repository
+
+```bash
+git clone https://github.com/waffiqaziz/quizz.git
+cd quizz
+```
+
+#### 2. Flutter Version Management (FVM)
+
+This project uses FVM (Flutter Version Management) to ensure consistency across
+development environments.
+
+Install and use the required Flutter version `3.35.2` via FVM:
+
+```bash
+fvm install 3.35.2
+fvm use 3.35.2
+```
+
+#### 3. Install dependencies
+
+```bash
+flutter pub get
+```
+
+#### 4. Run Flutter project
+
+```bash
+flutter run
+```
 
 ## What You can get in here?
 
