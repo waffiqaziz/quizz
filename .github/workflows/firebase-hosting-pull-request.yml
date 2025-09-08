@@ -18,7 +18,7 @@ jobs:
 
       # Install Flutter SDK
       - name: Set up Flutter
-        uses: subosito/flutter-action@v395322a6cded4e9ed503aebd4cc1965625f8e59a
+        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e
         with:
           channel: stable
           flutter-version: ${{ env.FLUTTER_VERSION }}
@@ -36,7 +36,7 @@ jobs:
 
       # Deploy to Firebase Hosting
       - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_QUIZZ_FLUTTER_WEB }}
