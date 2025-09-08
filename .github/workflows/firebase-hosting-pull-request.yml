@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  FLUTTER_VERSION: 3.35.2
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -15,10 +18,13 @@ jobs:
 
       # Install Flutter SDK
       - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@v395322a6cded4e9ed503aebd4cc1965625f8e59a
         with:
-          channel: stable # Defaults to the latest stable version
-      - run: flutter --version
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          
+      - name: Verify Flutter installation
+        run: flutter --version
 
       # Flutter dependencies setup
       - name: Install Flutter dependencies

@@ -2,6 +2,8 @@
 
 A simple Flutter project designed for educational purposes, functioning as a quiz app.
 
+[![Flutter Version](https://img.shields.io/badge/flutter-v3.35.2-blue?logo=flutter&logoColor=white)](https://github.com/flutter/flutter/blob/main/CHANGELOG.md#3352)
+
 ## Getting Started
 
 For help getting started with Flutter development, view the
