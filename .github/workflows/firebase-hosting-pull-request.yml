@@ -26,6 +26,9 @@ jobs:
       - name: Verify Flutter installation
         run: flutter --version
 
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
       # Flutter dependencies setup
       - name: Install Flutter dependencies
         run: flutter pub get
