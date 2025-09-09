@@ -12,7 +12,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Development Setup
 
-This guide will help you set up the Storyzz project for local development.
+This guide will help you set up the Quizz project for local development.
 
 ### Prerequisites
 
