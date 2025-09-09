@@ -10,7 +10,8 @@ class Strings {
   static String information = 'Information';
   static String scontinue = 'Continue';
   static String back = 'Back';
-  static String messageInformation = 'Please note: Once you select an option and click \'Next\' button there is no going back. Make sure your choice is final.';
+  static String messageInformation =
+      'Please note: Once you select an option and click \'Next\' button there is no going back. Make sure your choice is final.';
   static String welcomeMessage =
       'Sharpen your Flutter & Dart skills! \nTake on fun quizzes, challenge your knowledge, and become a Flutter pro!';
 
@@ -27,7 +28,10 @@ class Strings {
   static String yes = 'Yes';
   static String warningMessage =
       'Do you really want to back to main page? Your progress will be lost.';
-  static String questionNumber(int currentQuestionIndex, List<Quizz> questions){
+  static String questionNumber(
+    int currentQuestionIndex,
+    List<Quizz> questions,
+  ) {
     return 'Question ${currentQuestionIndex + 1}/${questions.length}';
   }
 
@@ -39,9 +43,12 @@ class Strings {
   }
 
   static String yourAnswer(
-      List<String> answers, int index, List<Quizz> questions) {
+    List<String> answers,
+    int index,
+    List<Quizz> questions,
+  ) {
     return 'Your Answer: ${answers[index]}\nCorrect Answer: ${questions[index].answer}';
   }
 
-   static String githubUrl = 'https://github.com/waffiqaziz/quizz';
+  static String githubUrl = 'https://github.com/waffiqaziz/quizz';
 }

@@ -36,7 +36,10 @@ class QuizPageState extends State<QuizPage> {
           context,
           MaterialPageRoute(
             builder: (context) => ResultPage(
-                score: _score, answers: _answers, questions: quizData),
+              score: _score,
+              answers: _answers,
+              questions: quizData,
+            ),
           ),
         );
       }
