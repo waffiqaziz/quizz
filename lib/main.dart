@@ -24,9 +24,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const HomePage(),
-      routes: {
-        '/quiz': (context) => const QuizPage(),
-      },
+      routes: {'/quiz': (context) => const QuizPage()},
     );
   }
 }

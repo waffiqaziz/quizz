@@ -74,7 +74,10 @@ class QuizPageWideState extends State<QuizPageWide> {
                   children: [
                     // Question number
                     MyStyle.questionNumber(
-                        widget.currentQuestionIndex, widget.questions, context),
+                      widget.currentQuestionIndex,
+                      widget.questions,
+                      context,
+                    ),
                     const SizedBox(height: 20),
 
                     // Addon
@@ -107,7 +110,7 @@ class QuizPageWideState extends State<QuizPageWide> {
                     const SizedBox(height: 20),
 
                     // Keyboard Listener
-                    _keyboarListener()
+                    _keyboarListener(),
                   ],
                 ),
               ),
@@ -144,12 +147,19 @@ class QuizPageWideState extends State<QuizPageWide> {
             if (widget.currentQuestionIndex < widget.questions.length &&
                 optionIndex <
                     widget
-                        .questions[widget.currentQuestionIndex].option.length) {
-              widget.onOptionSelected(widget
-                  .questions[widget.currentQuestionIndex].option[optionIndex]);
+                        .questions[widget.currentQuestionIndex]
+                        .option
+                        .length) {
+              widget.onOptionSelected(
+                widget
+                    .questions[widget.currentQuestionIndex]
+                    .option[optionIndex],
+              );
             } else {
               // Handle the out-of-bounds situation gracefully
-              log("[SAFE] Index out of range: Invalid option or question index for Option KeyboardListener.");
+              log(
+                "[SAFE] Index out of range: Invalid option or question index for Option KeyboardListener.",
+              );
             }
           }
         }
@@ -160,11 +170,14 @@ class QuizPageWideState extends State<QuizPageWide> {
 
   Column _optionCodeWidget() {
     return Column(
-      children:
-          widget.questions[widget.currentQuestionIndex].option.map((option) {
+      children: widget.questions[widget.currentQuestionIndex].option.map((
+        option,
+      ) {
         return Container(
-          decoration:
-              MyStyle.optionBoxDecoration(widget.selectedAnswer, option),
+          decoration: MyStyle.optionBoxDecoration(
+            widget.selectedAnswer,
+            option,
+          ),
           margin: const EdgeInsets.only(bottom: 10),
           child: ClipRRect(
             borderRadius: MyStyle.radius50,
@@ -177,7 +190,10 @@ class QuizPageWideState extends State<QuizPageWide> {
                   title: Text(
                     option,
                     style: MyStyle.optionTextStyle(
-                        widget.selectedAnswer, option, context),
+                      widget.selectedAnswer,
+                      option,
+                      context,
+                    ),
                   ),
                   groupValue: widget.selectedAnswer,
                   value: option,
@@ -200,45 +216,53 @@ class QuizPageWideState extends State<QuizPageWide> {
           .asMap()
           .entries
           .map((entry) {
-        String option = entry.value;
-        return Flexible(
-          child: AspectRatio(
-            aspectRatio: 1.9,
-            child: Stack(
-              children: [
-                Container(
-                  decoration: MyStyle.optionBoxDecorationWeb(
-                      widget.selectedAnswer, option),
-                  margin: EdgeInsets.only(
-                      right: entry.key < lengthOption - 1 ? 10 : 0),
-                  child: InkWell(
-                    borderRadius: MyStyle.radius50,
-                    onTap: () => widget.onOptionSelected(option),
-                    child: Center(
-                      child: Padding(
-                        // add padding inside flexible
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          option,
-                          style: MyStyle.optionTextStyle(
-                              widget.selectedAnswer, option, context),
+            String option = entry.value;
+            return Flexible(
+              child: AspectRatio(
+                aspectRatio: 1.9,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: MyStyle.optionBoxDecorationWeb(
+                        widget.selectedAnswer,
+                        option,
+                      ),
+                      margin: EdgeInsets.only(
+                        right: entry.key < lengthOption - 1 ? 10 : 0,
+                      ),
+                      child: InkWell(
+                        borderRadius: MyStyle.radius50,
+                        onTap: () => widget.onOptionSelected(option),
+                        child: Center(
+                          child: Padding(
+                            // add padding inside flexible
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              option,
+                              style: MyStyle.optionTextStyle(
+                                widget.selectedAnswer,
+                                option,
+                                context,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-        );
-      }).toList(),
+              ),
+            );
+          })
+          .toList(),
     );
   }
 
   void _selectNextAnswer() {
     if (widget.selectedAnswer == null) {
       widget.onOptionSelected(
-          widget.questions[widget.currentQuestionIndex].option[0]);
+        widget.questions[widget.currentQuestionIndex].option[0],
+      );
     } else {
       final currentOptions =
           widget.questions[widget.currentQuestionIndex].option;
@@ -251,8 +275,12 @@ class QuizPageWideState extends State<QuizPageWide> {
   void _selectPreviousAnswer() {
     if (widget.selectedAnswer == null) {
       widget.onOptionSelected(
-          widget.questions[widget.currentQuestionIndex].option[
-              widget.questions[widget.currentQuestionIndex].option.length - 1]);
+        widget.questions[widget.currentQuestionIndex].option[widget
+                .questions[widget.currentQuestionIndex]
+                .option
+                .length -
+            1],
+      );
     } else {
       final currentOptions =
           widget.questions[widget.currentQuestionIndex].option;
@@ -266,16 +294,20 @@ class QuizPageWideState extends State<QuizPageWide> {
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(Strings.areYouSure,
-            style: const TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(
+          Strings.areYouSure,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         content: Text(Strings.warningMessage),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(false);
             },
-            child: Text(Strings.no,
-                style: const TextStyle(fontWeight: FontWeight.bold)),
+            child: Text(
+              Strings.no,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
           TextButton(
             onPressed: () {

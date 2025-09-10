@@ -8,11 +8,12 @@ class ResultPage extends StatelessWidget {
   final List<String> answers;
   final List<Quizz> questions;
 
-  const ResultPage(
-      {super.key,
-      required this.score,
-      required this.answers,
-      required this.questions});
+  const ResultPage({
+    super.key,
+    required this.score,
+    required this.answers,
+    required this.questions,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +25,12 @@ class ResultPage extends StatelessWidget {
             backgroundColor: MyColors.colorBackground,
             floating: true,
             pinned: false, // set true to keep  AppBar visible
-            iconTheme: const IconThemeData(
-              color: Colors.black,
-            ),
+            iconTheme: const IconThemeData(color: Colors.black),
             title: Text(
               Strings.quizResult,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
 
@@ -41,47 +40,48 @@ class ResultPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
               child: Text(
                 Strings.yourScore(score, questions),
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
           ),
 
           // Answer list
           SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Card.filled(
-                    color: Colors.white,
-                    borderOnForeground: true,
-                    elevation: 2.0,
-                    shadowColor: Colors.grey[500],
-                    child: ListTile(
-                      title: Text(questions[index].question),
-                      subtitle: Text(
-                        Strings.yourAnswer(answers, index, questions),
-                        style: TextStyle(
-                          color: answers[index] == questions[index].answer
-                              ? Colors.green
-                              : Colors.red,
-                        ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Card.filled(
+                  color: Colors.white,
+                  borderOnForeground: true,
+                  elevation: 2.0,
+                  shadowColor: Colors.grey[500],
+                  child: ListTile(
+                    title: Text(questions[index].question),
+                    subtitle: Text(
+                      Strings.yourAnswer(answers, index, questions),
+                      style: TextStyle(
+                        color: answers[index] == questions[index].answer
+                            ? Colors.green
+                            : Colors.red,
                       ),
                     ),
                   ),
-                );
-              },
-              childCount: questions.length,
-            ),
+                ),
+              );
+            }, childCount: questions.length),
           ),
 
           // Button
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.only(
-                  left: 30, right: 30, bottom: 30, top: 20),
+                left: 30,
+                right: 30,
+                bottom: 30,
+                top: 20,
+              ),
               child: FilledButton(
                 onPressed: () {
                   Navigator.pop(context);

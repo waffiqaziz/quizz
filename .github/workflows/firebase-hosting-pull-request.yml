@@ -1,15 +1,97 @@
 name: Deploy Flutter Web to Firebase Hosting
 
 on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "**/*.md"
+      - "*.md"
   pull_request:
     branches:
       - master
+    paths-ignore:
+      - "**/*.md"
+      - "*.md"
+  workflow_dispatch: 
 
 env:
   FLUTTER_VERSION: 3.35.2
 
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
+
 jobs:
+  analyze:
+    name: Analyze Code
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - uses: actions/checkout@v4
+      
+      # Install Flutter SDK
+      - name: Set up Flutter
+        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      # Flutter dependencies setup
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Verify code formatting
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+      
+      # Run static analysis
+      - name: Analyze Dart code
+        run: flutter analyze --no-fatal-infos
+
+  build_and_preview_web:
+    name: Build and Preview Firebase Web
+    needs: analyze
+    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - uses: actions/checkout@v4
+      
+      # Install Flutter SDK
+      - name: Set up Flutter
+        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+      
+      # Verify Flutter installation
+      - name: Flutter version
+        run: flutter --version
+  
+      # Flutter dependencies setup
+      - name: Install Flutter dependencies
+        run: flutter pub get
+      
+      # Build the Flutter web project
+      - name: Build Flutter Web
+        run: flutter build web --release
+        
+      # Deploy to Firebase Hosting Preview Channel
+      - name: Deploy to Firebase Hosting Preview
+        uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_QUIZZ_FLUTTER_WEB }}
+          projectId: quizz-flutter-web
+
   build_and_deploy:
+    name: Build and Deploy Firebase Web
+    needs: analyze
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +104,9 @@ jobs:
         with:
           channel: stable
           flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
           
+      # Verify Flutter installation
       - name: Verify Flutter installation
         run: flutter --version
 

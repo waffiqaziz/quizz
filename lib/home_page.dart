@@ -13,16 +13,17 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
-            icon: Padding(
-              padding: const EdgeInsets.all(7.0),
-              child: Image.asset('images/github-mark.png'),
-            ),
-            onPressed: () {
-              _launchUrl();
-            },
+        leading: IconButton(
+          icon: Padding(
+            padding: const EdgeInsets.all(7.0),
+            child: Image.asset('images/github-mark.png'),
           ),
-          backgroundColor: MyColors.colorBackground),
+          onPressed: () {
+            _launchUrl();
+          },
+        ),
+        backgroundColor: MyColors.colorBackground,
+      ),
       backgroundColor: MyColors.colorBackground,
       body: Center(
         child: SingleChildScrollView(
@@ -40,9 +41,9 @@ class HomePage extends StatelessWidget {
                 Text(
                   Strings.readyQuizz,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontFamily: Strings.varela,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    fontFamily: Strings.varela,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 Text(
@@ -54,7 +55,9 @@ class HomePage extends StatelessWidget {
                 Text(
                   Strings.quizInfo,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontFamily: Strings.varela, fontWeight: FontWeight.bold),
+                    fontFamily: Strings.varela,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 20),
@@ -62,9 +65,7 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     _showDialog(context);
                   },
-                  child: Text(
-                    Strings.startQuizz,
-                  ),
+                  child: Text(Strings.startQuizz),
                 ),
               ],
             ),
@@ -78,11 +79,11 @@ class HomePage extends StatelessWidget {
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(Strings.information,
-            style: const TextStyle(fontWeight: FontWeight.bold)),
-        content: Text(
-          Strings.messageInformation,
+        title: Text(
+          Strings.information,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
+        content: Text(Strings.messageInformation),
         actions: [
           TextButton(
             onPressed: () {
