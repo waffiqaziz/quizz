@@ -95,18 +95,22 @@ class QuizPageMobile extends StatelessWidget {
                             borderRadius: MyStyle.radius50,
                             onTap: () =>
                                 onOptionSelected(currentQuestion.option[index]),
-                            child: RadioListTile<String>(
-                              title: Text(
-                                currentQuestion.option[index],
-                                style: MyStyle.optionTextStyle(
-                                  selectedAnswer,
-                                  currentQuestion.option[index],
-                                  context,
-                                ),
-                              ),
+                            child: RadioGroup<String>(
                               groupValue: selectedAnswer,
-                              value: currentQuestion.option[index],
-                              onChanged: (value) => onOptionSelected(value!),
+                              onChanged: (value) {
+                                onOptionSelected(value!);
+                              },
+                              child: RadioListTile<String>(
+                                title: Text(
+                                  currentQuestion.option[index],
+                                  style: MyStyle.optionTextStyle(
+                                    selectedAnswer,
+                                    currentQuestion.option[index],
+                                    context,
+                                  ),
+                                ),
+                                value: currentQuestion.option[index],
+                              ),
                             ),
                           ),
                         ),

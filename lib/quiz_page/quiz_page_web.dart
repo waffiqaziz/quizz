@@ -186,18 +186,22 @@ class QuizPageWideState extends State<QuizPageWide> {
               child: InkWell(
                 borderRadius: MyStyle.radius50,
                 onTap: () => widget.onOptionSelected(option),
-                child: RadioListTile<String>(
-                  title: Text(
-                    option,
-                    style: MyStyle.optionTextStyle(
-                      widget.selectedAnswer,
+                child: RadioGroup<String>(
+                  groupValue: widget.selectedAnswer,
+                  onChanged: (value) {
+                    widget.onOptionSelected(value!);
+                  },
+                  child: RadioListTile<String>(
+                    value: option,
+                    title: Text(
                       option,
-                      context,
+                      style: MyStyle.optionTextStyle(
+                        widget.selectedAnswer,
+                        option,
+                        context,
+                      ),
                     ),
                   ),
-                  groupValue: widget.selectedAnswer,
-                  value: option,
-                  onChanged: (value) => widget.onOptionSelected(value!),
                 ),
               ),
             ),
