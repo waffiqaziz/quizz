@@ -2,7 +2,7 @@
 
 A simple Flutter project designed for educational purposes, functioning as a quiz app.
 
-[![Flutter Version](https://img.shields.io/badge/flutter-v3.35.2-blue?logo=flutter&logoColor=white)](https://github.com/flutter/flutter/blob/main/CHANGELOG.md#3352)
+[![Flutter Version](https://img.shields.io/badge/flutter-v3.38.5-blue?logo=flutter&logoColor=white)](https://github.com/flutter/flutter/blob/main/CHANGELOG.md#338.5)
 
 ## Getting Started
 
@@ -36,11 +36,11 @@ cd quizz
 This project uses FVM (Flutter Version Management) to ensure consistency across
 development environments.
 
-Install and use the required Flutter version `3.35.2` via FVM:
+Install and use the required Flutter version `3.38.5` via FVM:
 
 ```bash
-fvm install 3.35.2
-fvm use 3.35.2
+fvm install 3.38.5
+fvm use 3.38.5
 ```
 
 #### 3. Install dependencies
