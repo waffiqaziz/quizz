@@ -1,4 +1,4 @@
-name: Flutter CI/CD with Firebase Hosting
+name: Build
 
 on:
   push:
@@ -53,7 +53,7 @@ jobs:
         run: flutter analyze --no-fatal-infos
 
   build_android:
-    name: Build Android Paid Variant
+    name: Build Android
     needs: analyze
     runs-on: ubuntu-latest
     steps:
