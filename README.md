@@ -2,7 +2,9 @@
 
 A simple Flutter project designed for educational purposes, functioning as a quiz app.
 
-[![Flutter Version](https://img.shields.io/badge/flutter-v3.38.5-blue?logo=flutter&logoColor=white)](https://github.com/flutter/flutter/blob/main/CHANGELOG.md#338.5)
+[![Flutter Version](https://img.shields.io/badge/flutter-v3.38.6-blue?logo=flutter&logoColor=white)](https://github.com/flutter/flutter/blob/main/CHANGELOG.md#3386)
+[![Build](https://github.com/waffiqaziz/quizz/actions/workflows/build.yml/badge.svg)](https://github.com/waffiqaziz/quizz/actions/workflows/build.yml)
+[![Deploy Flutter Web to Firebase Hosting](https://github.com/waffiqaziz/quizz/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/waffiqaziz/quizz/actions/workflows/firebase-hosting-pull-request.yml)
 
 ## Getting Started
 
@@ -36,11 +38,11 @@ cd quizz
 This project uses FVM (Flutter Version Management) to ensure consistency across
 development environments.
 
-Install and use the required Flutter version `3.38.5` via FVM:
+Install and use the required Flutter version `3.38.6` via FVM:
 
 ```bash
-fvm install 3.38.5
-fvm use 3.38.5
+fvm install 3.38.6
+fvm use 3.38.6
 ```
 
 #### 3. Install dependencies
