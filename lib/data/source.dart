@@ -386,6 +386,99 @@ final List<Map<String, Object>> _questions = [
     "options": ["1", "error", "'String'", "0"],
     "answer": "error",
   },
+  {
+    'question': 'What is the purpose of the BuildContext in Flutter?',
+    'addon': '',
+    'options': [
+      'To build the application',
+      'To provide the location of a widget in the widget tree',
+      'To manage application state',
+      'To handle user input events',
+    ],
+    'answer': 'To provide the location of a widget in the widget tree',
+  },
+  {
+    'question': 'What is the output of that code?',
+    'addon': 'List<int> numbers = [1, 2, 3];\nprint(numbers[3]);',
+    'options': ['3', 'null', 'error', '0'],
+    'answer': 'error',
+  },
+  {
+    'question': 'Which widget is used to create scrollable lists in Flutter?',
+    'addon': '',
+    'options': ['Container', 'Column', 'ListView', 'Stack'],
+    'answer': 'ListView',
+  },
+  {
+    'question': 'What is the difference between hot reload and hot restart?',
+    'addon': '',
+    'options': [
+      'Hot reload restarts the app, hot restart preserves state',
+      'There is no difference',
+      'Hot reload preserves state, hot restart does not',
+      'Hot reload is faster than hot restart',
+    ],
+    'answer': 'Hot reload preserves state, hot restart does not',
+  },
+  {
+    'question': 'What is the output of that code?',
+    'addon': 'var x;\nprint(x);',
+    'options': ['0', 'null', 'undefined', 'error'],
+    'answer': 'null',
+  },
+  {
+    'question': 'Which keyword is used to define a constant in Dart?',
+    'addon': '',
+    'options': ['final', 'const', 'var', 'Both final and const'],
+    'answer': 'Both final and const',
+  },
+  {
+    'question': 'What is the output of that code?',
+    'addon': 'String name = "Flutter";\nprint(name.length);',
+    'options': ['7', '6', 'Flutter', 'error'],
+    'answer': '7',
+  },
+  {
+    'question': 'What does setState() do in a StatefulWidget?',
+    'addon': '',
+    'options': [
+      'Creates a new state',
+      'Deletes the current state',
+      'Notifies the framework that state has changed and triggers a rebuild',
+      'Saves the state to local storage',
+    ],
+    'answer':
+        'Notifies the framework that state has changed and triggers a rebuild',
+  },
+  {
+    'question': 'What is the output of that code?',
+    'addon': 'int a = 10;\nint b = 3;\nprint(a / b);',
+    'options': ['3', '3.0', '3.3333333333333335', 'error'],
+    'answer': '3.3333333333333335',
+  },
+  {
+    'question': 'Which package manager does Flutter use?',
+    'addon': '',
+    'options': ['npm', 'pip', 'pub', 'maven'],
+    'answer': 'pub',
+  },
+  {
+    'question': 'What is the output of that code?',
+    'addon': 'bool isTrue = true;\nprint(!isTrue);',
+    'options': ['true', 'false', '!true', 'error'],
+    'answer': 'false',
+  },
+  {
+    'question': 'Which widget is used for layout in Flutter?',
+    'addon': '',
+    'options': [
+      'Only Container',
+      'Row, Column, Stack, and Container',
+      'Only Row and Column',
+      'Only Stack',
+    ],
+    'answer': 'Row, Column, Stack, and Container',
+  },
 ];
 
 // Format questions
