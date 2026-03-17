@@ -33,7 +33,7 @@ jobs:
       
       # Install Flutter SDK
       - name: Set up Flutter
-        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e
+        uses: subosito/flutter-action@0ca7a949e71ae44c8e688a51c5e7e93b2c87e295
         with:
           channel: stable
           flutter-version: ${{ env.FLUTTER_VERSION }}
@@ -62,7 +62,7 @@ jobs:
       
       # Install Flutter SDK
       - name: Set up Flutter
-        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e
+        uses: subosito/flutter-action@0ca7a949e71ae44c8e688a51c5e7e93b2c87e295
         with:
           channel: stable
           flutter-version: ${{ env.FLUTTER_VERSION }}
@@ -100,7 +100,7 @@ jobs:
 
       # Install Flutter SDK
       - name: Set up Flutter
-        uses: subosito/flutter-action@fd55f4c5af5b953cc57a2be44cb082c8f6635e8e
+        uses: subosito/flutter-action@0ca7a949e71ae44c8e688a51c5e7e93b2c87e295
         with:
           channel: stable
           flutter-version: ${{ env.FLUTTER_VERSION }}
