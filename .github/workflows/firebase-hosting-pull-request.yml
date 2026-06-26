@@ -59,6 +59,11 @@ jobs:
     steps:
       # Checkout the repository
       - uses: actions/checkout@v7
+
+       # Node 24.17 (runner default) breaks the Firebase OAuth fetch; 24.18.0 fixes it.
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: "24.18.0"
       
       # Install Flutter SDK
       - name: Set up Flutter
@@ -80,13 +85,14 @@ jobs:
       - name: Build Flutter Web
         run: flutter build web --release
         
-      # Deploy to Firebase Hosting Preview Channel
-      - name: Deploy to Firebase Hosting Preview
-        uses: FirebaseExtended/action-hosting-deploy@500ac625ca2dd40cbd15f7659af953801858032a
+      # 15.22.3 disables keep-alive in google-auth-library, fixing the same OAuth
+      # break for service-account auth (firebase-tools#10716, nodejs/node#63989).
+      - uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0.10.0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_QUIZZ_FLUTTER_WEB }}
           projectId: quizz-flutter-web
+          firebaseToolsVersion: "15.22.3"
 
   build_and_deploy:
     name: Build and Deploy Firebase Web
@@ -97,6 +103,11 @@ jobs:
     steps:
       # Checkout the repository
       - uses: actions/checkout@v7
+
+      # Node 24.17 (runner default) breaks the Firebase OAuth fetch; 24.18.0 fixes it.
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: "24.18.0"
 
       # Install Flutter SDK
       - name: Set up Flutter
@@ -118,13 +129,14 @@ jobs:
       - name: Build Flutter Web
         run: flutter build web --release
 
-      # Deploy to Firebase Hosting
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@500ac625ca2dd40cbd15f7659af953801858032a
+      # 15.22.3 disables keep-alive in google-auth-library, fixing the same OAuth
+      # break for service-account auth (firebase-tools#10716, nodejs/node#63989).
+      - uses: FirebaseExtended/action-hosting-deploy@e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c # v0.10.0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_QUIZZ_FLUTTER_WEB }}
           channelId: live
           projectId: quizz-flutter-web
+          firebaseToolsVersion: "15.22.3"
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
