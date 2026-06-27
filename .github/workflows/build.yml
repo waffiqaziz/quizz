@@ -16,7 +16,7 @@ on:
   workflow_dispatch: 
 
 env:
-  FLUTTER_VERSION: 3.38.6
+  FLUTTER_VERSION: 3.44.4
   JAVA_VERSION: '17'
   JAVA_DISTRIBUTION: 'temurin'
   GRADLE_CACHE: 'gradle'
