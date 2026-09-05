@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizz/data/model/quizz.dart';
 import 'package:quizz/res/strings.dart';
+
 import 'colors.dart';
 
 class MyStyle {
