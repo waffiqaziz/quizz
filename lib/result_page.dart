@@ -28,9 +28,8 @@ class ResultPage extends StatelessWidget {
             iconTheme: const IconThemeData(color: Colors.black),
             title: Text(
               Strings.quizResult,
-              style: Theme.of(
-                context,
-              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.headlineSmall
+                  ?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
 
@@ -40,9 +39,8 @@ class ResultPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
               child: Text(
                 Strings.yourScore(score, questions),
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyLarge
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
           ),
