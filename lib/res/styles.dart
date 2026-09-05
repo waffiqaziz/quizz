@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizz/data/model/quizz.dart';
 import 'package:quizz/res/strings.dart';
+
 import 'colors.dart';
 
 class MyStyle {
@@ -69,9 +70,8 @@ class MyStyle {
   static Text questionText(String question, BuildContext context) {
     return Text(
       question,
-      style: Theme.of(
-        context,
-      ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+      style: Theme.of(context).textTheme.bodyLarge
+          ?.copyWith(fontWeight: FontWeight.bold),
     );
   }
 
@@ -94,9 +94,8 @@ class MyStyle {
         decoration: MyStyle.boxDecorAddon(),
         child: Text(
           addon,
-          style: Theme.of(
-            context,
-          ).textTheme.bodyMedium?.copyWith(fontFamily: Strings.jetBrains),
+          style: Theme.of(context).textTheme.bodyMedium
+              ?.copyWith(fontFamily: Strings.jetBrains),
         ),
       );
     } else {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizz/res/colors.dart';
+
 import 'quiz_page/quiz_page.dart';
 import 'res/strings.dart';
 import 'home_page.dart';

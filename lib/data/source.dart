@@ -34,8 +34,7 @@ final List<Map<String, Object>> _questions = [
       'An immutable widget',
       'A widget that manages its own state and can be rebuilt based on changes',
     ],
-    'answer':
-        'A widget that manages its own state and can be rebuilt based on changes',
+    'answer': 'A widget that manages its own state and can be rebuilt based on changes',
   },
   {
     'question': 'What is the output of that code?',
@@ -74,8 +73,7 @@ final List<Map<String, Object>> _questions = [
     'answer': 'Google',
   },
   {
-    'question':
-        'If you initialize a variable as var, once assigned type cannot change?',
+    'question': 'If you initialize a variable as var, once assigned type cannot change?',
     'addon': '',
     'options': ['True', 'False'],
     'answer': 'True',
@@ -94,14 +92,12 @@ final List<Map<String, Object>> _questions = [
   },
   {
     'question': 'What is ob1 data type?',
-    'addon':
-        'main(){\n  var ob1=Car().color;\n}\n\nclass Car{String color=\'red\';}',
+    'addon': 'main(){\n  var ob1=Car().color;\n}\n\nclass Car{String color=\'red\';}',
     'options': ['car', 'var', 'String', 'non of these'],
     'answer': 'String',
   },
   {
-    'question':
-        'A container can be decorated with a _____________, such as a background, a border, or a shadow',
+    'question': 'A container can be decorated with a _____________, such as a background, a border, or a shadow',
     'addon': '',
     'options': [
       'BoxDecoration',
@@ -129,8 +125,7 @@ final List<Map<String, Object>> _questions = [
     'answer': 'Increased App Size',
   },
   {
-    'question':
-        'What is the command to verify that the Flutter environment is set up correctly??',
+    'question': 'What is the command to verify that the Flutter environment is set up correctly??',
     'addon': '',
     'options': [
       'flutter run',
@@ -141,8 +136,7 @@ final List<Map<String, Object>> _questions = [
     'answer': 'flutter doctor',
   },
   {
-    'question':
-        'Which of these functions contain code which houses the widgets of your app?',
+    'question': 'Which of these functions contain code which houses the widgets of your app?',
     'addon': '',
     'options': ['debug()', 'build()', 'random()', 'runApp()'],
     'answer': 'build()',
@@ -154,15 +148,13 @@ final List<Map<String, Object>> _questions = [
     'answer': '2',
   },
   {
-    'question':
-        'What function that responsible for returning the widgets that are attached to the screen?',
+    'question': 'What function that responsible for returning the widgets that are attached to the screen?',
     'addon': '',
     'options': ['Container', 'SizedBox', 'main()', 'runApp()'],
     'answer': 'runApp()',
   },
   {
-    'question':
-        'When using a Text, theres a way to use a pre-configured theme. Which section makes use of this functionality correctly?',
+    'question': 'When using a Text, theres a way to use a pre-configured theme. Which section makes use of this functionality correctly?',
     'addon': '',
     'options': [
       'Text("Michael",style: TextStyle(fontWeight: FontWeight.bold),),',
@@ -174,8 +166,7 @@ final List<Map<String, Object>> _questions = [
         'Text("Michael",  style: Theme.of(context).textTheme.titleLarge),',
   },
   {
-    'question':
-        'In a set of Widgets aligned in column form, what property makes all children of these columns aligned to the left?',
+    'question': 'In a set of Widgets aligned in column form, what property makes all children of these columns aligned to the left?',
     'addon': '',
     'options': [
       'crossAxisAlignment: CrossAxisAlignment.start',
@@ -192,15 +183,13 @@ final List<Map<String, Object>> _questions = [
     'answer': 'Dart VM',
   },
   {
-    'question':
-        'Main folder on a flutter project thats contain all flutter source code will be in?',
+    'question': 'Main folder on a flutter project thats contain all flutter source code will be in?',
     'addon': '',
     'options': ['dart', 'lib', 'name_project', 'build'],
     'answer': 'lib',
   },
   {
-    'question':
-        'What are widgets whose state values cannot be changed (immutable), are static, and have limited interactions?',
+    'question': 'What are widgets whose state values cannot be changed (immutable), are static, and have limited interactions?',
     'addon': '',
     'options': [
       'Scaffold',
@@ -222,23 +211,20 @@ final List<Map<String, Object>> _questions = [
     'answer': 'StateFull Widget',
   },
   {
-    'question':
-        'What widget that is used to create a basic material design display in a Flutter application, which can also be called the basis of a page?',
+    'question': 'What widget that is used to create a basic material design display in a Flutter application, which can also be called the basis of a page?',
     'addon': '',
     'options': ['AppBar', 'Material Apps', 'Scaffold', 'Container'],
     'answer': 'Scaffold',
   },
   {
-    'question':
-        'What is the Header (top part) of the application or commonly known as toolbar…',
+    'question': 'What is the Header (top part) of the application or commonly known as toolbar…',
     'addon': '',
     'options': ['TopNav', 'Drawer', 'AppBar', 'Material App'],
     'answer': 'AppBar',
   },
   {
     "question": "What is the output of the following code?",
-    "addon":
-        "const pi = 3.14;\nvar radius = 5;\nvar area = pi * radius * radius;\nprint('Area: \$area');",
+    "addon": "const pi = 3.14;\nvar radius = 5;\nvar area = pi * radius * radius;\nprint('Area: \$area');",
     "options": [
       "Area: 78.5",
       "Area: 78.5;",
@@ -272,8 +258,7 @@ final List<Map<String, Object>> _questions = [
   },
   {
     "question": "What is the output of this code?",
-    "addon":
-        "var a = 10;\nvar b = 20;\nvar c = a > b ? 'Greater' : 'Lesser';\nprint(c);",
+    "addon": "var a = 10;\nvar b = 20;\nvar c = a > b ? 'Greater' : 'Lesser';\nprint(c);",
     "options": ["Greater", "Lesser", "10 > 20", "error"],
     "answer": "Lesser",
   },
@@ -321,8 +306,7 @@ final List<Map<String, Object>> _questions = [
   },
   {
     "question": "What will the following code output?",
-    "addon":
-        "void main() {\n  var numbers = [1, 2, 3, 4, 5];\n  print(numbers.where((n) => n > 3).toList());\n}",
+    "addon": "void main() {\n  var numbers = [1, 2, 3, 4, 5];\n  print(numbers.where((n) => n > 3).toList());\n}",
     "options": ["[4, 5]", "[3, 4, 5]", "[4]", "error"],
     "answer": "[4, 5]",
   },
@@ -339,15 +323,13 @@ final List<Map<String, Object>> _questions = [
   },
   {
     "question": "What is the output of this code snippet?",
-    "addon":
-        "void main() {\n  var x = 10;\n  var y = x++;\n  print(y);\n  print(x);\n}",
+    "addon": "void main() {\n  var x = 10;\n  var y = x++;\n  print(y);\n  print(x);\n}",
     "options": ["10, 11", "11, 11", "10, 10", "error"],
     "answer": "10, 11",
   },
   {
     "question": "What does this code print?",
-    "addon":
-        "void main() {\n  var x = [1, 2, 3];\n  var y = x.map((i) => i * 2).toList();\n  print(y);\n}",
+    "addon": "void main() {\n  var x = [1, 2, 3];\n  var y = x.map((i) => i * 2).toList();\n  print(y);\n}",
     "options": ["[2, 4, 6]", "[1, 2, 3]", "[2, 3, 4]", "error"],
     "answer": "[2, 4, 6]",
   },
@@ -360,29 +342,25 @@ final List<Map<String, Object>> _questions = [
   },
   {
     "question": "What will be printed by the following code?",
-    "addon":
-        "void main() {\n  const x = 2;\n  const y = 3;\n  print(x * y == 6);\n}",
+    "addon": "void main() {\n  const x = 2;\n  const y = 3;\n  print(x * y == 6);\n}",
     "options": ["true", "false", "error", "6"],
     "answer": "true",
   },
   {
     "question": "What does this code output?",
-    "addon":
-        "void main() {\n  var a = [1, 2, 3];\n  var b = a;\n  b[0] = 4;\n  print(a[0]);\n}",
+    "addon": "void main() {\n  var a = [1, 2, 3];\n  var b = a;\n  b[0] = 4;\n  print(a[0]);\n}",
     "options": ["1", "2", "3", "4"],
     "answer": "4",
   },
   {
     "question": "What is the output of this code snippet?",
-    "addon":
-        "void main() {\n  var str = 'Dart';\n  str += ' Programming';\n  print(str);\n}",
+    "addon": "void main() {\n  var str = 'Dart';\n  str += ' Programming';\n  print(str);\n}",
     "options": ["'Dart'", "'Dart Programming'", "'Dart+'", "error"],
     "answer": "'Dart Programming'",
   },
   {
     "question": "Which statement is true about the following code?",
-    "addon":
-        "void main() {\n  var a = 1;\n  if (a is int) {\n    a = 'String';\n  }\n  print(a);\n}",
+    "addon": "void main() {\n  var a = 1;\n  if (a is int) {\n    a = 'String';\n  }\n  print(a);\n}",
     "options": ["1", "error", "'String'", "0"],
     "answer": "error",
   },
